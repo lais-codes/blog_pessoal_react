@@ -11,8 +11,12 @@ function Footer() {
                     <p className=" text-xl font-bold">Blog Pessoal | Copyrigth: {data}</p>
                     <p className="text-lg">Acesse minhas redes sociais:</p>
                     <div className=" flex gap-2">
-                        <LinkedinLogoIcon size={44} weight="bold" />
-                        <GithubLogoIcon size={44} weight="bold" />
+                        <a href="https://www.linkedin.com/in/lais-b-sousa/" target="_blank">
+                            <LinkedinLogoIcon size={44} weight="bold" />
+                        </a>
+                        <a href="https://github.com/lais-codes" target="_blank">
+                            <GithubLogoIcon size={44} weight="bold" />
+                        </a>
                     </div>
                 </div>
             </div>
