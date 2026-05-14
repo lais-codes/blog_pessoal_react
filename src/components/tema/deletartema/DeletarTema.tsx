@@ -4,6 +4,7 @@ import { ClipLoader } from "react-spinners";
 import { AuthContext } from "../../../contexts/AuthContext";
 import type Tema from "../../../models/Tema";
 import { buscar, deletar } from "../../../services/Service";
+import { ToastAlerta } from "../../../utils/ToastAlerta";
 
 function DeletarTema() {
 
@@ -27,14 +28,14 @@ function DeletarTema() {
         } catch (error: any) {
             if (error.toString().includes('401')) {
                 handleLogout()
-                alert("Sua sessão expirou, faça login novamente.")
+                ToastAlerta("Sua sessão expirou, faça login novamente.", "info")
             }
         }
     }
 
     useEffect(() => {
         if (token === '') {
-            alert("Você precisa estar logado.")
+            ToastAlerta("Você precisa estar logado.", "info")
             navigate('/')
         }
     }, [token])
@@ -54,14 +55,14 @@ function DeletarTema() {
                     'Authorization': token
                 }
             })
-            alert("Tema deletado com sucesso!")
+            ToastAlerta("Tema deletado com sucesso!", "sucesso")
             navigate('/temas')
         } catch (error: any) {
             if (error.toString().includes('401')) {
                 handleLogout()
-                alert("Sua sessão expirou, faça login novamente.")
+                ToastAlerta("Sua sessão expirou, faça login novamente.", "info")
             } else {
-                alert("Ocorreu um erro ao deletar o tema. Por favor, tente novamente.")
+                ToastAlerta("Ocorreu um erro ao deletar o tema. Por favor, tente novamente.", "erro")
             }
         }
 
