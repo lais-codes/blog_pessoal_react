@@ -20,12 +20,6 @@ function Cadastro() {
         postagem: [],
     })
 
-    useEffect(() => {
-        if(usuario.id !== 0){
-            retornar()
-        }
-    }, [usuario])
-
     function retornar(){
         navigate('/login')
     }
@@ -45,22 +39,29 @@ function Cadastro() {
         e.preventDefault()
 
         if(confirmarSenha === usuario.senha && usuario.senha.length >= 8){
- 
             setIsLoading(true)
         
             try{
-                await cadastrarUsuario(`/usuarios/cadastrar`, usuario, setUsuario)
+                await cadastrarUsuario("/usuarios/cadastrar", {
+                    nome: usuario.nome,
+                    usuario: usuario.usuario,
+                    senha: usuario.senha,
+                    foto: usuario.foto
+                }, setUsuario)
                 ToastAlerta("Usuário foi cadastrado com sucesso!", "sucesso")
-            }catch(error){
+                navigate("/login")
+
+            } catch(error){
                 ToastAlerta("Erro ao cadastrar o usuário!", "erro")
+            } finally {
+                setIsLoading(false)
             }
+
         }else{
             ToastAlerta("Dados do usuário inconsistentes! Verifique as informações do cadastro.", "erro")
             setUsuario({...usuario, senha: ''})
             setConfirmarSenha('')
         }
- 
-        setIsLoading(false)
     }
  
 
