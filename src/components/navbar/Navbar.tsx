@@ -18,10 +18,9 @@ function Navbar() {
 
     let component: ReactNode
 
-    if (usuario.token !== "") {
+    if (usuario?.token) {
 
         component = (
-   
             <div className='w-full flex justify-center py-4 bg-indigo-900 text-white'>
                 <div className="container flex justify-between text-lg mx-8">
                     <Link to='/home' className="text-2xl font-bold">Blog Pessoal</Link>
@@ -36,11 +35,7 @@ function Navbar() {
             </div>
         )
     }
-    return (
-        <>
-            { component }
-        </>
-    )
+    return <> { component } </>
 }
  
 export default Navbar;
